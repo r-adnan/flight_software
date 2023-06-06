@@ -1,0 +1,24 @@
+{
+    "title": "Hello initialization file",
+    "description": ["Define runtime configurations"],
+    "config": {
+ 
+       "APP_CFE_NAME": "HELLO",
+       "APP_PERF_ID":  127,
+ 
+       "APP_CMD_PIPE_DEPTH": 5,
+       "APP_CMD_PIPE_NAME":  "HELLO_CMD",
+ 
+       "HELLO_CMD_TOPICID": 0,
+       "BC_SCH_1_HZ_TOPICID": 0,
+       "BC_SCH_4_SEC_TOPICID": 0,
+       "HELLO_HK_TLM_TOPICID": 0,
+ 
+       "TBL_LOAD_FILE": "/cf/hello_tbl.json",
+       "TBL_DUMP_FILE": "/cf/hello~.json"
+ 
+    }
+ }
+ 
+ 
+ 
