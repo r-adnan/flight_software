@@ -1,0 +1,109 @@
+"Figure out how you are oriented in inertial space and then point to where you want to be."
+
+Fundamental Modes:
+    Detumble
+        Reduce ngular rates
+    Single axis pointing
+        Point solar panels at sun
+        Align instrument with magnetic field vector
+    Fully-determined attitude
+        Point communications antenna at ground site
+        Point optics at specified target
+        Local-vertical/local-horizontal (LVLH) hold (e.g. nadir)
+
+Sensors:
+    Magnetometer
+        Senses local magnetic field Typically an integrated three-axis MEMS package that reports field strength along each sense axis
+        Can be damaged by exposure to excessive fields
+        Can pick up residual fields from various components as well as dynamic fields such as reaction wheel motors
+            Require phasing with magnetorquers to avoid magnetorquer field dominating measurements
+    Gyroscope
+        Senses angular rates
+            Can be purchased as integrated three-axis packages or discrete single-axis componentsPrimary specifications are noise, bias, angular random walk
+            Can be quite sensitive to temperature chnges or mechanical stress
+        Fundamental technology are MEMS, fiber-optic, and ring-laser
+            Cubesats are typically MEMS, some smallsats use FOGs
+                MEMS are low space/weight/power (SWaP) and cheap
+            MEMS are quite noisy and drift relatively quickly, this impacts attitude filter design
+                A lot of academic papers assume FOG- or RLG-level perofrmance in their simulations
+                Can buy your way out of some of this
+        Can have large implications for simulation and model fidelity
+            Farrenkopf's approximation is just noise and bias, MEMS gyros likely require modelling of bias drift for meaningful assessment
+    Sun Sensors
+        Many varieties exist
+            Discrete photodiodes: Simple intensity, are combined at the subsystem level to form an estimated sun vector
+            Photodiode pyramid: Differential intensities on the faces of the pyramid estimate a pointing error
+            Integrated IC: Report X/Y angles of the incident light source
+            Image Sensor: Project light source onto an image sensor to produce a vector
+        Accuracy ranges from approx. 0.5 degrees (image sensor) to pprox 5 deg (photodiodes)
+        Need some other sensor (or allow drift) while in eclipse
+    Star Trackers
+        Takes a picture of the star field and references to internal database to determine what part of the sky t is looking at Image provides both direction to identified centroid and rotation about that vector, rotation is less accurate
+        Approx 5 arc-sec cross-boresight and approx. 15 arc-sec roll accuracy (at star tracker unit level) achievable in cubesat hardware
+            System level accuracy worse
+        Sensitive to stray light so require a baffle and/or large leepouts around any bright object
+            More complex algoritms provides some resilience
+        Sensitive to vehicle rotation s excess rotation smears stars, educing accuracy and eventually breaking the algorithm,
+            Some use optical-flow algorithms to procide rate information
+        Some systems use two star trackers (oriented 90 deg apart)
+            Allows correction of reduces accuracy in roll   Higher availability (one star tracker can track while the other is blinded)
+            Adds filter complexity to acoid jitter from switchover
+        Introduce AIT handling considerations (cleanliness)
+    GPSR
+        The GPS receiver is also an important part of the ADCS  
+            site-trackign requires the satellite know where it ispointing is time-sensitiveinternal models (e.g. magnetic field) require absolute tim
+            Reuquirements take some trackign    
+                Site-track angular error from a 1km position error is 0.15 detg
+                Important position/time tie as a 1km dfirect position error is also an approx 130ms timing rerror, ADCS may require the PPS edge to synchronize data
+
+Actuators
+    Passive Magnetics
+        Permanent magnet that wants to align with Earth's magnetic field (e.g. compass needle)
+            Also need some material that exhibits magnetic hystersis to provide damping of oscillations about the magnetic field vecto
+        Applies an external torque so does change net system angular momentum
+        Provide coarse \
+    Torque Coils/rods   
+        Electromagnets that interact with Earth's megnatic field to produce a torque
+            Typically three on orthogonl axes to provide full coverage
+        Same Fundamenta \
+    Reaction Wheels
+        Generate torque by changing speed of a flywheel
+            Acceolerating the flywheel one direction accelerates the vehicle the opposite directio
+        Typically biased away from zero speed   
+            Reaction wheel failure mode is typically bearing failure at zero speed crossings
+        Internal torque so no change on net sytem angular momentum
+            Will eventually "Saturate" is compensating for an external torque, requiers some means (e.g. torque rods) to produce an external torque frot he weheels to torque against to reduce flywheel spee
+        Three orthogonal reaction wheels provide full coverage, four allows redundancy as well as nonzero speed zero-net-momentum confuigurations for hggher agility
+    Control Moment Gyros 
+        Generate torque by gimballing a flywheel    
+            Changing the spin axis and therefore the angular momentum vector, of the flywheel produces a gyroscopic torque 
+            Saturation behavior is alignment of all CMG axes 
+        Highest control authority of any acutator but also most complicated 
+            Very few smallsat-scale options exist 
+        Conventional CMGs maintain a fixed flywheel speed \
+    Thrusters
+        While it is technically possible to use thrusters for attitude control (assuming appropriate placement) this is not recommended
+            Current stae of smallsat thrusters is not great for tat level of reliability
+            Limited mission life due to propellant usage 
+            Relatively coarse control since min impulse bit may be a large and firing-to-firing consistency may be poor
+            Even large spacecrat only use ADCS thrusters fro momentum management and stick with reaction wheels for primary control 
+
+Requirements 
+    Fundamental ADCS parameters:
+        Absolute pointing accuracy:"How well it is pointed"
+        Aboslute pointining knowledge:"How well do we know how it is pointed."
+        Pointing stability: "How well does it stay on target"
+        Jitter: How shaky is it
+        Slew Rate: "How fast can it point to a new target"
+    Requirement Divers:
+        Payload
+            Optics will have max allowable jitter (preventing blurring)
+            Pointing accuracy to put sensor on targetP 
+            Pointing knowledge to characterize response and geolocate data 
+        communications
+            Tracking a ground site requris up to approx. 1.5 deg/s slew rate (ISS orbit)
+            Nadir track is 0.06 deg/s slew rate 
+        Power 
+            Solar arrays generate less power as incidence angle decreases \
+    Requirement flow     
+    

@@ -1,0 +1,32 @@
+ADCS - Attitude determination control system
+
+    -Determine orientation in 3D space using star trackers to an accuracy able to detect slosh motion
+    -Manipulate orientation in 3D space using reaction wheels (accuracy of 0.01 deg with 1-sigma error or better)
+    -Deploy and use active control algorithms for slosh control
+    -Detumble (from orbit insertion or unstable attituede behavior) using a magnetorquer
+    -Desaturate reaction wheels with a magnetorquer
+    -Report attitude data collected by attitude sensors
+
+class ADCS{
+    getOrientation(){
+        -takes input from star trackers and calculates orientation
+    }     
+    manipulateOrientation(){
+        -calls getOrientation()
+        -turns reaction wheels to reach a target orientation
+    }
+    controlSlosh(){
+        -active control algorithms
+    }
+    detumble(){
+        -if orbitInsertion || unstable attitude behavior
+            -gives input to magnetorquer 
+    }
+    desaturateWheels(){
+        -gives input to magnitorquer
+    }
+    reportData(){
+        -experiment data contains attitude data
+            -read and report attitude data
+    }
+}
