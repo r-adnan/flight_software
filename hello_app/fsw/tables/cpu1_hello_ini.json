@@ -1,4 +1,4 @@
-{
+{ 
     "title": "Hello initialization file",
     "description": ["Define runtime configurations"],
     "config": {
