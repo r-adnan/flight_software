@@ -20,7 +20,7 @@
        "load_addr": 0, //???
        "exception-action": 0, //???
        "app-framework": "osk", //???
-       "tables": ["ADCS_ini.json", "estimation_tbl.json"]
+       "tables": ["ADCS_ini.json", "ADCS_data_tbl.json"]
     }
     
     }}
