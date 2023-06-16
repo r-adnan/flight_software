@@ -1,26 +1,27 @@
-{ "app": { 
+{ "app": {
+   
+   "title": "HELLO",
+   "version": "0.1.0",
+   "owner": "OpenSatkit",
+   "url": "",
 
+   "description": [
+      "This app was generated using the app_c_fw template"
+   ],
 
-"title": "HELLO",
-"version": "0.1.0",
-"owner": "OpenSatkit",
-"url": "",
-
-"description": [
-   "This app was generated using the app_c_fw template"
-],
-
-"cfs": {
-   "cfe-type": "CFE_APP",
-   "obj-file": "hello",
-   "entry-symbol": "HELLO_AppMain",
-   "name": "HELLO",
-   "priority": 70,
-   "stack": 32768,
-   "load_addr": 0,
-   "exception-action": 0,
-   "app-framework": "osk",
-   "tables": ["hello_ini.json", "hello_tbl.json"]
-}
-
+   "cfs": {
+      "cfe-type": "CFE_APP",
+      "obj-file": "hello",
+      "entry-symbol": "HELLO_AppMain",
+      "name": "HELLO",
+      "priority": 70,
+      "stack": 32768,
+      "load_addr": 0,
+      "exception-action": 0,
+      "app-framework": "osk",
+      "tables": ["hello_ini.json", "hello_tbl.json"]
+   }
+   
 }}
+
+

@@ -13,14 +13,14 @@
 **  GNU Affero General Public License for more details.
 **
 **  Purpose:
-**    Define configurations for the Hello application
+**    Define configurations for the Adcs application
 **
 **  Notes:
 **   1. Compile-time configurations that are applied to all platform
 **      deployments of this app for a mission.
 **   2. These definitions should be minimal and only contain parameters that
 **      need to be configurable for a mission and that must be defined at
-**      compile time. Use hello_platform_cfg.h for compile-time
+**      compile time. Use adcs_platform_cfg.h for compile-time
 **      parameters that can be tuned for each platform deployment. Use
 **      app_cfg.h for compile-time parameters that don't need to be
 **      configured when an app is deployed but are useful to be parameterized
@@ -32,8 +32,8 @@
 **    2. cFS Application Developer's Guide
 **
 */
-#ifndef _hello_mission_cfg_
-#define _hello_mission_cfg_
+#ifndef _adcs_mission_cfg_
+#define _adcs_mission_cfg_
 
 
-#endif /* _hello_mission_cfg_ */
+#endif /* _adcs_mission_cfg_ */

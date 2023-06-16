@@ -13,7 +13,7 @@
 **  GNU Affero General Public License for more details.
 **
 **  Purpose:
-**    Define the Hello application
+**    Define the Adcs application
 **
 **  Notes:
 **   1. This file was generated generated from the cFSAT 'Hello World'
@@ -25,8 +25,8 @@
 **
 */
 
-#ifndef _hello_app_
-#define _hello_app_
+#ifndef _adcs_app_
+#define _adcs_app_
 
 /*
 ** Includes
@@ -43,10 +43,10 @@
 ** Events
 */
 
-#define HELLO_INIT_APP_EID    (HELLO_BASE_EID + 0)
-#define HELLO_NOOP_EID        (HELLO_BASE_EID + 1)
-#define HELLO_EXIT_EID        (HELLO_BASE_EID + 2)
-#define HELLO_INVALID_MID_EID (HELLO_BASE_EID + 3)
+#define ADCS_INIT_APP_EID    (ADCS_BASE_EID + 0)
+#define ADCS_NOOP_EID        (ADCS_BASE_EID + 1)
+#define ADCS_EXIT_EID        (ADCS_BASE_EID + 2)
+#define ADCS_INVALID_MID_EID (ADCS_BASE_EID + 3)
 
 
 /**********************/
@@ -56,18 +56,18 @@
 
 /******************************************************************************
 ** Command Packets
-** - See EDS command definitions in hello.xml
+** - See EDS command definitions in adcs.xml
 */
 
 
 /******************************************************************************
 ** Telmetery Packets
-** - See EDS command definitions in hello.xml
+** - See EDS command definitions in adcs.xml
 */
 
 
 /******************************************************************************
-** HELLO_Class
+** ADCS_Class
 */
 typedef struct
 {
@@ -89,10 +89,10 @@ typedef struct
    ** Telemetry Packets
    */
    
-   HELLO_HkTlm_t  HkTlm;
+   ADCS_HkTlm_t  HkTlm;
    
    /*
-   ** HELLO State & Contained Objects
+   ** ADCS State & Contained Objects
    */ 
            
    uint32           PerfId;
@@ -103,14 +103,14 @@ typedef struct
 
    EXOBJ_Class_t  ExObj;
    
-} HELLO_Class_t;
+} ADCS_Class_t;
 
 
 /*******************/
 /** Exported Data **/
 /*******************/
 
-extern HELLO_Class_t  Hello;
+extern ADCS_Class_t  Adcs;
 
 
 /************************/
@@ -119,24 +119,24 @@ extern HELLO_Class_t  Hello;
 
 
 /******************************************************************************
-** Function: HELLO_AppMain
+** Function: ADCS_AppMain
 **
 */
-void HELLO_AppMain(void);
+void ADCS_AppMain(void);
 
 
 /******************************************************************************
-** Function: HELLO_NoOpCmd
+** Function: ADCS_NoOpCmd
 **
 */
-bool HELLO_NoOpCmd(void *ObjDataPtr, const CFE_MSG_Message_t *MsgPtr);
+bool ADCS_NoOpCmd(void *ObjDataPtr, const CFE_MSG_Message_t *MsgPtr);
 
 
 /******************************************************************************
-** Function: HELLO_ResetAppCmd
+** Function: ADCS_ResetAppCmd
 **
 */
-bool HELLO_ResetAppCmd(void *ObjDataPtr, const CFE_MSG_Message_t *MsgPtr);
+bool ADCS_ResetAppCmd(void *ObjDataPtr, const CFE_MSG_Message_t *MsgPtr);
 
 
-#endif /* _hello_ */
+#endif /* _adcs_ */

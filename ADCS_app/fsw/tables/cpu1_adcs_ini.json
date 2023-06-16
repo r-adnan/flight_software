@@ -1,0 +1,21 @@
+{
+   "title": "Adcs initialization file",
+   "description": ["Define runtime configurations"],
+   "config": {
+      
+      "APP_CFE_NAME": "ADCS",
+      "APP_PERF_ID":  127,
+          
+      "APP_CMD_PIPE_DEPTH": 5,
+      "APP_CMD_PIPE_NAME":  "ADCS_CMD",
+
+      "ADCS_CMD_TOPICID": 0,
+      "BC_SCH_1_HZ_TOPICID": 0,
+      "BC_SCH_4_SEC_TOPICID": 0,
+      "ADCS_HK_TLM_TOPICID": 0,
+
+      "TBL_LOAD_FILE": "/cf/adcs_tbl.json",
+      "TBL_DUMP_FILE": "/cf/adcs~.json"
+      
+   }
+}

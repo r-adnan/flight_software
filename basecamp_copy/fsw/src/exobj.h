@@ -13,104 +13,72 @@
 **  GNU Affero General Public License for more details.
 **
 **  Purpose:
-**    Define the Hello application
+**    Define the EXOBJ_Class 
 **
 **  Notes:
-**   1. This file was generated generated from the cFSAT 'Hello World'
-**      app template for the Application C Framework (app_c_fw).
+**    None
 **
 **  References:
 **    1. OpenSatKit Object-based Application Developer's Guide
 **    2. cFS Application Developer's Guide
 **
 */
-
-#ifndef _hello_app_
-#define _hello_app_
+#ifndef _exobj_
+#define _exobj_
 
 /*
 ** Includes
 */
 
 #include "app_cfg.h"
-#include "exobj.h"
+#include "exobjtbl.h"
+
 
 /***********************/
 /** Macro Definitions **/
 /***********************/
 
+
 /*
-** Events
+** Event Message IDs
 */
 
-#define HELLO_INIT_APP_EID    (HELLO_BASE_EID + 0)
-#define HELLO_NOOP_EID        (HELLO_BASE_EID + 1)
-#define HELLO_EXIT_EID        (HELLO_BASE_EID + 2)
-#define HELLO_INVALID_MID_EID (HELLO_BASE_EID + 3)
+#define EXOBJ_SET_MODE_CMD_EID (EXOBJ_BASE_EID + 0)
+#define EXOBJ_EXECUTE_EID      (EXOBJ_BASE_EID + 1)
 
 
 /**********************/
 /** Type Definitions **/
 /**********************/
 
-
 /******************************************************************************
 ** Command Packets
-** - See EDS command definitions in hello.xml
+** - See EDS command definitions in adcs.xml
 */
 
 
 /******************************************************************************
-** Telmetery Packets
-** - See EDS command definitions in hello.xml
+** EXOBJ_Class
 */
 
-
-/******************************************************************************
-** HELLO_Class
-*/
 typedef struct
 {
 
-   /* 
-   ** App Framework
-   */ 
-    
-   INITBL_Class_t  IniTbl; 
-   CMDMGR_Class_t  CmdMgr;
-   TBLMGR_Class_t  TblMgr;
-   
    /*
-   ** Command Packets
-   */
-
- 
-   /*
-   ** Telemetry Packets
+   ** State Data
    */
    
-   HELLO_HkTlm_t  HkTlm;
-   
+   ADCS_CounterMode_Enum_t CounterMode;
+   uint16  CounterValue;
+       
    /*
-   ** HELLO State & Contained Objects
-   */ 
-           
-   uint32           PerfId;
-   CFE_SB_PipeId_t  CmdPipe;
-   CFE_SB_MsgId_t   CmdMid;
-   CFE_SB_MsgId_t   ExecuteMid;
-   CFE_SB_MsgId_t   SendHkMid;
+   ** Contained Objects
+   */
 
-   EXOBJ_Class_t  ExObj;
+   EXOBJTBL_Class_t  Tbl;
    
-} HELLO_Class_t;
+} EXOBJ_Class_t;
 
-
-/*******************/
-/** Exported Data **/
-/*******************/
-
-extern HELLO_Class_t  Hello;
 
 
 /************************/
@@ -119,24 +87,46 @@ extern HELLO_Class_t  Hello;
 
 
 /******************************************************************************
-** Function: HELLO_AppMain
+** Function: EXOBJ_Constructor
+**
+** Initialize the example object to a known state
+**
+** Notes:
+**   1. This must be called prior to any other function.
 **
 */
-void HELLO_AppMain(void);
+void EXOBJ_Constructor(EXOBJ_Class_t *ExObjPtr,
+                       const INITBL_Class_t *IniTbl,
+                       TBLMGR_Class_t *TblMgr);
 
 
 /******************************************************************************
-** Function: HELLO_NoOpCmd
+** Function: EXOBJ_ResetStatus
+**
+** Reset counters and status flags to a known reset state.
+**
+** Notes:
+**   1. Any counter or variable that is reported in HK telemetry that doesn't
+**      change the functional behavior should be reset.
 **
 */
-bool HELLO_NoOpCmd(void *ObjDataPtr, const CFE_MSG_Message_t *MsgPtr);
+void EXOBJ_ResetStatus(void);
 
 
 /******************************************************************************
-** Function: HELLO_ResetAppCmd
+** Function: EXOBJ_SetModeCmd
 **
 */
-bool HELLO_ResetAppCmd(void *ObjDataPtr, const CFE_MSG_Message_t *MsgPtr);
+bool EXOBJ_SetModeCmd(void *DataObjPtr, const CFE_MSG_Message_t *MsgPtr);
 
 
-#endif /* _hello_ */
+/******************************************************************************
+** Function: EXOBJ_Execute
+**
+** Perform periodic processing that is trigger by an 'execute' request message
+** from the scheduler app.
+*/
+void EXOBJ_Execute(void);
+
+
+#endif /* _exobj_ */

@@ -53,7 +53,7 @@
 
 /******************************************************************************
 ** Command Packets
-** - See EDS command definitions in hello.xml
+** - See EDS command definitions in adcs.xml
 */
 
 
@@ -61,43 +61,9 @@
 ** EXOBJ_Class
 */
 
-typedef struct
-{
-
-   /*
-   ** State Data
-   */
-   
-   HELLO_CounterMode_Enum_t CounterMode;
-   uint16  CounterValue;
-       
-   /*
-   ** Contained Objects
-   */
-
-   EXOBJTBL_Class_t  Tbl;
-   
-} EXOBJ_Class_t;
-
-
-
 /************************/
 /** Exported Functions **/
 /************************/
-
-
-/******************************************************************************
-** Function: EXOBJ_Constructor
-**
-** Initialize the example object to a known state
-**
-** Notes:
-**   1. This must be called prior to any other function.
-**
-*/
-void EXOBJ_Constructor(EXOBJ_Class_t *ExObjPtr,
-                       const INITBL_Class_t *IniTbl,
-                       TBLMGR_Class_t *TblMgr);
 
 
 /******************************************************************************
@@ -111,13 +77,6 @@ void EXOBJ_Constructor(EXOBJ_Class_t *ExObjPtr,
 **
 */
 void EXOBJ_ResetStatus(void);
-
-
-/******************************************************************************
-** Function: EXOBJ_SetModeCmd
-**
-*/
-bool EXOBJ_SetModeCmd(void *DataObjPtr, const CFE_MSG_Message_t *MsgPtr);
 
 
 /******************************************************************************

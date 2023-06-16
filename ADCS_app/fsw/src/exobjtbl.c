@@ -62,9 +62,11 @@ static CJSON_Obj_t JsonTblObjs[] = {
 
    /* Table Data Address    Table Data Length           Updated, Data Type,  float,    JSON string,  core-json query length excludes '\0' */
    
-   { &TblData.LowLimit,     sizeof(TblData.LowLimit),   false,   JSONNumber, false,  { "low-limit",  (sizeof("low-limit")-1)}      },
-   { &TblData.HighLimit,    sizeof(TblData.HighLimit),  false,   JSONNumber, false,  { "high-limit", (sizeof("high-limit")-1)}     }
-   
+   { &TblData.x,       sizeof(TblData.x),       false,   JSONNumber, true, {"des_att_x",     (sizeof("des_att_x")-1)}},
+   { &TblData.y,       sizeof(TblData.y),       false,   JSONNumber, true, {"des_att_y",     (sizeof("des_att_y")-1)}},
+   { &TblData.z,       sizeof(TblData.z),       false,   JSONNumber, true, {"des_att_z",     (sizeof("des_att_z")-1)}},
+   { &TblData.theta,   sizeof(TblData.theta),   false,   JSONNumber, true, {"des_att_theta", (sizeof("des_att_theta")-1)}}
+
 };
 
 
@@ -169,10 +171,16 @@ bool EXOBJTBL_DumpCmd(TBLMGR_Tbl_t *Tbl, uint8 DumpType, const char *Filename)
       sprintf(DumpRecord,"   \"description\": \"Table dumped at %s\",\n",SysTimeStr);
       OS_write(FileHandle,DumpRecord,strlen(DumpRecord));
       
-      sprintf(DumpRecord,"     \"low-limit\": %d\n   },\n", ExObjTbl->Data.LowLimit);
+      sprintf(DumpRecord,"     \"des_att_x\": %f\n   },\n", ExObjTbl->Data.x);
       OS_write(FileHandle,DumpRecord,strlen(DumpRecord));
 
-      sprintf(DumpRecord,"     \"low-limit\": %d\n   }\n}\n", ExObjTbl->Data.HighLimit);
+      sprintf(DumpRecord,"     \"des_att_y\": %f\n   }\n}\n", ExObjTbl->Data.y); //this ssaid low limit also
+      OS_write(FileHandle,DumpRecord,strlen(DumpRecord));
+
+      sprintf(DumpRecord,"     \"des_att_z\": %f\n   }\n}\n", ExObjTbl->Data.z); 
+      OS_write(FileHandle,DumpRecord,strlen(DumpRecord));
+
+      sprintf(DumpRecord,"     \"des_att_theta\": %f\n   }\n}\n", ExObjTbl->Data.theta); 
       OS_write(FileHandle,DumpRecord,strlen(DumpRecord));
 
       OS_close(FileHandle);
@@ -229,18 +237,9 @@ static bool LoadJsonData(size_t JsonFileLen)
    }
    else
    {
-      if (TblData.LowLimit >= TblData.HighLimit)
-      {
-         CFE_EVS_SendEvent(EXOBJTBL_LOAD_ERR_EID, CFE_EVS_EventType_ERROR, 
-                           "Table rejected. Low Limit %d must be less than high limit %d",
-                           TblData.LowLimit, TblData.HighLimit);
-      }
-      else
-      {
-         memcpy(&ExObjTbl->Data,&TblData, sizeof(EXOBJTBL_Data_t));
-         ExObjTbl->LastLoadCnt = ObjLoadCnt;
-         RetStatus = true;
-      }
+      memcpy(&ExObjTbl->Data,&TblData, sizeof(EXOBJTBL_Data_t));
+      ExObjTbl->LastLoadCnt = ObjLoadCnt;
+      RetStatus = true;
    }
    
    return RetStatus;

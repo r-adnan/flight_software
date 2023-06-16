@@ -183,7 +183,7 @@ static int32 InitApp(void)
       ** Constuct app's contained objects
       */
             
-     // EXOBJ_Constructor(EXOBJ_OBJ, INITBL_OBJ, TBLMGR_OBJ);
+      EXOBJ_Constructor(EXOBJ_OBJ, INITBL_OBJ, TBLMGR_OBJ);
       
       /*
       ** Initialize app level interfaces
@@ -201,7 +201,6 @@ static int32 InitApp(void)
       CMDMGR_RegisterFunc(CMDMGR_OBJ, ADCS_LOAD_TBL_CC, TBLMGR_OBJ, TBLMGR_LoadTblCmd, TBLMGR_LOAD_TBL_CMD_DATA_LEN);
       CMDMGR_RegisterFunc(CMDMGR_OBJ, ADCS_DUMP_TBL_CC, TBLMGR_OBJ, TBLMGR_DumpTblCmd, TBLMGR_DUMP_TBL_CMD_DATA_LEN);
 
-      
 
       /*
       ** Initialize app messages 
@@ -309,6 +308,14 @@ static void SendHousekeepingTlm(void)
    Payload->LastTblAction       = LastTbl->LastAction;
    Payload->LastTblActionStatus = LastTbl->LastActionStatus;
 
+   
+   /*
+   ** Example Object Data
+   */
+
+   Payload->CounterMode  = Adcs.ExObj.CounterMode;
+   Payload->CounterValue = Adcs.ExObj.CounterValue;
+   
 
    CFE_SB_TimeStampMsg(CFE_MSG_PTR(Adcs.HkTlm.TelemetryHeader));
    CFE_SB_TransmitMsg(CFE_MSG_PTR(Adcs.HkTlm.TelemetryHeader), true);

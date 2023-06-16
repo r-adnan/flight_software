@@ -61,8 +61,10 @@
 typedef struct
 {
 
-   uint16   LowLimit;
-   uint16   HighLimit;
+   double   x;
+   double   y;
+   double   z; 
+   double   theta;
 
 } EXOBJTBL_Data_t;
 

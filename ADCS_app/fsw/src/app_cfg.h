@@ -13,14 +13,14 @@
 **  GNU Affero General Public License for more details.
 **
 **  Purpose:
-**    Define configurations for the Hello application
+**    Define configurations for the Adcs application
 **
 **  Notes:
 **   1. These configurations should have an application scope and define
 **      parameters that shouldn't need to change across deployments. If
 **      a change is made to this file or any other app source file during
-**      a deployment then the definition of the HELLO_REV
-**      macro in hello_platform_cfg.h should be updated.
+**      a deployment then the definition of the ADCS_REV
+**      macro in adcs_platform_cfg.h should be updated.
 **
 **  References:
 **    1. OpenSatKit Object-based Application Developer's Guide
@@ -35,8 +35,8 @@
 */
 
 #include "app_c_fw.h"
-#include "hello_platform_cfg.h"
-#include "hello_eds_typedefs.h"
+#include "adcs_platform_cfg.h"
+#include "adcs_eds_typedefs.h"
 
 
 /******************************************************************************
@@ -45,8 +45,8 @@
 ** 1.0 - Initial version, compatible with cFE Caelum
 */
 
-#define  HELLO_MAJOR_VER   1
-#define  HELLO_MINOR_VER   0
+#define  ADCS_MAJOR_VER   1
+#define  ADCS_MINOR_VER   0
 
 
 /******************************************************************************
@@ -71,7 +71,7 @@
 **    same parameter as defined in step 1
 **
 **    "config": {
-**       "CMD_PIPE_NAME":  "HELLO_CMD",
+**       "CMD_PIPE_NAME":  "ADCS_CMD",
 **       "CMD_PIPE_DEPTH": 5,
 ** 
 ** 4. Access the parameteres in your code 
@@ -103,10 +103,10 @@
 #define CFG_APP_CMD_PIPE_NAME   APP_CMD_PIPE_NAME
 #define CFG_APP_CMD_PIPE_DEPTH  APP_CMD_PIPE_DEPTH
 
-#define CFG_HELLO_CMD_TOPICID      HELLO_CMD_TOPICID
-#define CFG_HELLO_EXE_TOPICID      BC_SCH_1_HZ_TOPICID
-#define CFG_HELLO_SEND_HK_TOPICID  BC_SCH_4_SEC_TOPICID
-#define CFG_HELLO_HK_TLM_TOPICID   HELLO_HK_TLM_TOPICID
+#define CFG_ADCS_CMD_TOPICID      ADCS_CMD_TOPICID
+#define CFG_ADCS_EXE_TOPICID      BC_SCH_1_HZ_TOPICID
+#define CFG_ADCS_SEND_HK_TOPICID  BC_SCH_4_SEC_TOPICID
+#define CFG_ADCS_HK_TLM_TOPICID   ADCS_HK_TLM_TOPICID
 
 #define CFG_TBL_LOAD_FILE       TBL_LOAD_FILE
 #define CFG_TBL_DUMP_FILE       TBL_DUMP_FILE
@@ -117,10 +117,10 @@
    XX(APP_PERF_ID,uint32) \
    XX(APP_CMD_PIPE_NAME,char*) \
    XX(APP_CMD_PIPE_DEPTH,uint32) \
-   XX(HELLO_CMD_TOPICID,uint32) \
+   XX(ADCS_CMD_TOPICID,uint32) \
    XX(BC_SCH_1_HZ_TOPICID,uint32) \
    XX(BC_SCH_4_SEC_TOPICID,uint32) \
-   XX(HELLO_HK_TLM_TOPICID,uint32) \
+   XX(ADCS_HK_TLM_TOPICID,uint32) \
    XX(TBL_LOAD_FILE,char*) \
    XX(TBL_DUMP_FILE,char*) \
 
@@ -135,7 +135,7 @@ DECLARE_ENUM(Config,APP_CONFIG)
 ** exceeded so it is the developer's responsibility to verify the ranges. 
 */
 
-#define HELLO_BASE_EID  (APP_C_FW_APP_BASE_EID +  0)
+#define ADCS_BASE_EID  (APP_C_FW_APP_BASE_EID +  0)
 #define EXOBJ_BASE_EID       (APP_C_FW_APP_BASE_EID + 20)
 #define EXOBJTBL_BASE_EID    (APP_C_FW_APP_BASE_EID + 40)
 

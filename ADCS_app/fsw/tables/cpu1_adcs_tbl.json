@@ -1,0 +1,9 @@
+{
+   "app-name": "ADCS",
+   "tbl-name": "Desired Attitude",
+   "description": "Contains desired attitude in form of unit quaternion",
+   "des_att_x":  0.0,
+   "des_att_y": 0.0,
+   "des_att_z": 0.0,
+   "des_att_theta": 0.0
+}

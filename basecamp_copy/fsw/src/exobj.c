@@ -41,7 +41,7 @@
 /** Local Function Prototypes **/
 /*******************************/
 
-const char* CounterModeStr(HELLO_CounterMode_Enum_t  CounterMode);
+const char* CounterModeStr(ADCS_CounterMode_Enum_t  CounterMode);
 
 /**********************/
 /** Global File Data **/
@@ -64,7 +64,7 @@ void EXOBJ_Constructor(EXOBJ_Class_t *ExObjPtr,
 
    CFE_PSP_MemSet((void*)ExObj, 0, sizeof(EXOBJ_Class_t));
     
-   ExObj->CounterMode  = HELLO_CounterMode_Increment;
+   ExObj->CounterMode  = ADCS_CounterMode_Increment;
    ExObj->CounterValue = ExObj->Tbl.Data.LowLimit;
 
    EXOBJTBL_Constructor(&ExObj->Tbl, IniTbl);
@@ -97,11 +97,11 @@ bool EXOBJ_SetModeCmd(void *DataObjPtr, const CFE_MSG_Message_t *MsgPtr)
 {
    
    bool RetStatus = false;
-   const HELLO_CounterMode_Payload_t *Cmd = CMDMGR_PAYLOAD_PTR(MsgPtr, HELLO_SetCounterMode_t);
-   HELLO_CounterMode_Enum_t PrevMode = ExObj->CounterMode;
+   const ADCS_CounterMode_Payload_t *Cmd = CMDMGR_PAYLOAD_PTR(MsgPtr, ADCS_SetCounterMode_t);
+   ADCS_CounterMode_Enum_t PrevMode = ExObj->CounterMode;
    
-   if ((Cmd->Mode == HELLO_CounterMode_Increment) ||
-       (Cmd->Mode == HELLO_CounterMode_Decrement))
+   if ((Cmd->Mode == ADCS_CounterMode_Increment) ||
+       (Cmd->Mode == ADCS_CounterMode_Decrement))
    {
    
       RetStatus = true;
@@ -132,7 +132,7 @@ bool EXOBJ_SetModeCmd(void *DataObjPtr, const CFE_MSG_Message_t *MsgPtr)
 void EXOBJ_Execute(void)
 {
    
-   if (ExObj->CounterMode == HELLO_CounterMode_Increment)
+   if (ExObj->CounterMode == ADCS_CounterMode_Increment)
    {
       if (ExObj->CounterValue < ExObj->Tbl.Data.HighLimit)
       {
@@ -169,14 +169,14 @@ void EXOBJ_Execute(void)
 **
 ** Type checking should enforce valid parameter
 */
-const char* CounterModeStr(HELLO_CounterMode_Enum_t  CounterMode)
+const char* CounterModeStr(ADCS_CounterMode_Enum_t  CounterMode)
 {
 
    static const char *CounterModeEnumStr[] =
    {
       "UNDEFINED", 
-      "INCREMENT",    /* HELLO_CounterMode_Increment */
-      "DECREMENT"     /* HELLO_CounterMode_Deccrement */
+      "INCREMENT",    /* ADCS_CounterMode_Increment */
+      "DECREMENT"     /* ADCS_CounterMode_Deccrement */
    };
         
    return CounterModeEnumStr[CounterMode];
